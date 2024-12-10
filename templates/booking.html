@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Table</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #f1c40f;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 100;
+        }
+
+        header .logo-container img {
+            width: 120px;
+            height: auto;
+        }
+
+        header .header-text {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4d4d4d;
+            text-align: left;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            margin-right: 100px;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #4d4d4d;
+            font-size: 1.2em;
+        }
+
+        header nav ul li a:hover {
+            color: black;
+        }
+
+        /* Main content styling */
+        main {
+            padding: 20px;
+            margin-top: 120px;
+            text-align: center;
+        }
+
+        main h2 {
+            font-size: 2.5em;
+            color: #4d4d4d;
+        }
+
+        main p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Form Styling */
+        .book-table-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .book-table-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .book-table-form label {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .book-table-form input, 
+        .book-table-form select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .book-table-form input:focus, 
+        .book-table-form select:focus {
+            border-color: #f1c40f;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+
+        .book-table-form button {
+            padding: 12px;
+            width: 100%;
+            font-size: 1.2em;
+            color: #4d4d4d;
+            background-color: #f1c40f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .book-table-form button:hover {
+            background-color: #d35400;
+        }
+
+        /* Section styling */
+        section {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/lemon_logo.png' %}" alt="Lemon Logo" class="logo">
+        </div>
+        <div class="header-text">Book a Table :)</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'menu' %}">Menu</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Book a Table at Little Lemon</h2>
+            <p>Reserve your spot to enjoy a delightful dining experience at Little Lemon. Fill out the form below to book your table now!</p>
+            <form action="{% url 'booking' %}" method="POST" class="book-table-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Your Phone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <input type="number" id="guests" name="guests" min="1" max="20" placeholder="Enter the number of guests" required>
+                </div>
+                <button type="submit">Book Now</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

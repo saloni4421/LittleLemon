@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact - Little Lemonn</title>
+    <style>
+        /* Header Styling */
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        } 
+        header{
+            background-color: #f1c40f;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px; /* Increased header height */
+            z-index: 100;
+        }
+
+        header .logo-container img {
+            width: 120px;
+            height: auto;
+        }
+
+        header .header-text {
+            font-size: 2em; /* Increased font size */
+            font-weight: bold;
+            color: #4d4d4d;
+            text-align: left;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            margin-right: 100px;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #4d4d4d;
+            font-size: 1.2em;
+        }
+
+        header nav ul li a:hover {
+            color: black;
+        }
+
+        /* Main content styling to avoid overlap with fixed header */
+        main {
+            padding: 20px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        main h2 {
+            font-size: 2.5em;
+            color: #4d4d4d;
+        }
+
+        main p {
+            font-size: 1.2em;
+            color: #7f8c8d;  /* Light grey text */
+            margin-top: 10px;
+        }
+
+        main a {
+            color: #e67e22;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        main a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Form Styles */
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto; /* Center the form on the page */
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form section heading */
+        form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #333;
+        }
+
+        /* Form inputs and textarea */
+        form input, 
+        form textarea {
+            width: 100%; /* Make inputs full-width */
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Focus effect for inputs */
+        form input:focus,
+        form textarea:focus {
+            border-color: #4d90fe; /* Highlight border on focus */
+            box-shadow: 0 0 8px rgba(77, 144, 254, 0.2);
+            outline: none;
+        }
+
+        /* Labels styling */
+        form label {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Submit button */
+        form button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2em;
+            color: #4d4d4d;
+            background-color: #f1c40f; /* Green button */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button hover effect */
+        form button:hover {
+            background-color: #e67e22;
+        }
+
+        /* Form section spacing */
+        section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        /* Google Map Styles */
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+        }
+
+    </style>
+</head>
+<body>
+    {% load static %}
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/lemon_logo.png' %}" alt="Lemon Logo" class="logo">
+        </div>
+        <div class="header-text">Contact Little Lemon :)</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'menu' %}">Menu</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Contact Form Section -->
+        <section>
+            <h2>Contact Form</h2>
+            <form action="{% url 'contact' %}" method="POST">
+                {% csrf_token %}
+                <div>
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+        <!-- Contact Information Section -->
+        <section>
+            <h2>Our Details</h2>
+            <p>Email: <a href="mailto:contact@littlelemon.com">contact@littlelemon.com</a></p>
+            <p>Phone: +123 456 7890</p>
+            <p>Address: 123 Little Lemon Street, City, Country</p>
+        </section>
+
+        <!-- Google Map Section -->
+        <section>
+            <h2>Find Us Here</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=YOUR_GOOGLE_MAPS_LINK" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </section>
+    </main>
+</body>
+</html>

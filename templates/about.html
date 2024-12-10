@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about - Little Lemonn</title>
+    <style>
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        /* Header Styling */
+        header {
+            background-color: #f1c40f;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px; /* Increased header height */
+            z-index: 100;
+        }
+
+        header .logo-container img {
+            width: 120px;
+            height: auto;
+        }
+
+        header .header-text {
+            font-size: 2em; /* Increased font size */
+            font-weight: bold;
+            color: #4d4d4d;
+            text-align: left;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            margin-right: 100px;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #4d4d4d;
+            font-size: 1.2em;
+        }
+
+        header nav ul li a:hover {
+            color: black;
+        }
+
+        /* Main content styling to avoid overlap with fixed header */
+        main {
+            padding: 20px;
+            text-align: center;
+            margin-top: 120px; /* Adjusted padding-top to account for header height */
+        }
+
+        main h2 {
+            font-size: 2.5em;
+            color: #4d4d4d;
+            margin-top: 10px;
+        }
+
+        main p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        /* Section styling */
+        section {
+            margin-bottom: 40px;
+        }
+
+        /* Image Styling */
+        .about-image {
+            width: 80%;
+            max-width: 600px;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Call to Action Button */
+        .cta-button {
+            margin-top: 30px;
+            padding: 12px 20px;
+            background-color: #f1c40f;
+            color: #4d4d4d;
+            border: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #d35400;
+            transition: background-color 0.3s;
+        }
+
+    </style>
+</head>
+<body> 
+    {% load static %}
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/lemon_logo.png' %}" alt="Lemon Logo" class="logo">
+        </div>
+        <div class="header-text">About Little Lemon :)</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'menu' %}">Menu</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Our Story</h2>
+            <p>Little Lemon is a family-owned restaurant specializing in lemon-inspired dishes. We started with a small idea and a big love for fresh, flavorful ingredients. Today, we offer a menu that combines tradition with a twist of creativity, all while celebrating the bright and zesty flavor of lemon!</p>
+        </section>
+
+        <section>
+            <h2>Why Choose Us?</h2>
+            <p>At Little Lemon, we believe in serving fresh, high-quality food made with love and care. Whether you're here for a light lunch, a refreshing drink, or a memorable dinner, we promise you'll enjoy every bite. Our chefs are passionate about experimenting with lemon and bringing out its natural zest in every dish!</p>
+        </section>
+
+        <section>
+            <h2>Join Us Today!</h2>
+            <p>Experience the zest and freshness that only Little Lemon can offer. Come visit us or make a reservation today!</p>
+            <a href="{% url 'booking' %}" class="cta-button">Book a Table</a>
+        </section>
+    </main>
+</body>
+</html>

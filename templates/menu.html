@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu - Little Lemonn</title>
+    <style>
+        /* Header Styling */
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        header {
+            background-color: #f1c40f;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px; /* Increased header height */
+            z-index: 100;
+        }
+
+        header .logo-container img {
+            width: 120px;
+            height: auto;
+        }
+
+        header .header-text {
+            font-size: 2em; /* Increased font size */
+            font-weight: bold;
+            color: #4d4d4d;
+            text-align: left;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            margin-right: 100px;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #4d4d4d;
+            font-size: 1.2em;
+            transition: color 0.3s ease; 
+        }
+
+        header nav ul li a:hover {
+            color: black;
+        }
+
+        /* Main content styling to avoid overlap with fixed header */
+        body {
+            background-color: #f9f9f9;  /* Light background */
+            color: #4d4d4d;  /* Dark grey text */
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-container {
+            padding: 20px;
+            margin-top: 120px; /* Adjusted padding-top to account for header height */
+        }
+
+        .category {
+            margin-bottom: 40px;
+        }
+
+        .category h2 {
+            font-size: 2.5em;
+            color: #e67e22;  /* Lemon Orange */
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background-color: #fff;  /* White background for items */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #f1c40f;  /* Lemon yellow border */
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .menu-item h3 {
+            font-size: 1.8em;
+            color: #4d4d4d;  /* Dark grey for item name */
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .menu-item p {
+            color: #7f8c8d;  /* Lighter grey for description */
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .menu-item .price {
+            font-size: 1.3em;
+            color: #f39c12;  /* Golden price */
+            font-weight: bold;
+        }
+
+        .menu-item .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #e67e22;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item .btn:hover {
+            background-color: #d35400;  /* Darker orange on hover */
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/lemon_logo.png' %}" alt="Lemon Logo" class="logo">
+        </div>
+        <div class="header-text">Little Lemon Menu :)</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'menu' %}">Menu</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="menu-container">
+        {% for category in categories %}
+            <div class="category">
+                <h2>{{ category.catname }}</h2>
+                <div class="menu-items">
+                    {% for item in category.menuitem_set.all %}
+                        <div class="menu-item">
+                            <img src="{{ item.Image.url }}" alt="{{ item.Name }}">
+                            <h3>{{ item.Name }}</h3>
+                            <p>{{ item.Description }}</p>
+                            <p class="price">₹{{ item.Price }}</p>
+                            <a href="{% url 'order' %}" class="btn">Order Now</a>
+                        </div>
+                    {% empty %}
+                        <p>No items available in this category.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
